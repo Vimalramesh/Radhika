@@ -42,7 +42,16 @@ function generateId() {
 function loadMenu() {
   const existing = loadFromStorage(STORAGE_KEYS.MENU, null);
   if (Array.isArray(existing) && existing.length > 0) {
-    menuItems = existing;
+    // Fix image paths for existing items (in case old URLs were stored)
+    menuItems = existing.map((item) => {
+      if (item.name === "Samosa" && !item.imageUrl) {
+        return { ...item, imageUrl: "samosa.png" };
+      }
+      if (item.name === "Somas" && !item.imageUrl) {
+        return { ...item, imageUrl: "somas.png" };
+      }
+      return item;
+    });
   } else {
     menuItems = [
       {
