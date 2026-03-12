@@ -69,8 +69,8 @@
       </section>
     </main>
 
-    <!-- Reports and Admin -->
-    <section class="panel wide" id="reports-section">
+    <!-- Reports and Admin (hidden for customers, shown after Admin Login) -->
+    <section class="panel wide hidden-admin" id="reports-section">
       <div class="reports-layout">
         <!-- Monthly sales report -->
         <div class="reports-block">
@@ -102,8 +102,8 @@
           </table>
         </div>
 
-        <!-- Admin / Menu CRUD (hidden by default, unlocked via Admin Login button) -->
-        <div class="reports-block hidden-admin" id="admin-section">
+        <!-- Admin / Menu CRUD -->
+        <div class="reports-block" id="admin-section">
           <h2>Admin - Menu Setup</h2>
           <form id="menu-form" class="menu-form">
             <input type="hidden" id="menu-id" />

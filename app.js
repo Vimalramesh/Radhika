@@ -501,9 +501,9 @@ function setupEventListeners() {
       const entered = prompt("Enter admin PIN:");
       if (entered === null) return;
       if (entered === ADMIN_PIN) {
-        const adminSection = document.getElementById("admin-section");
-        if (adminSection) {
-          adminSection.classList.remove("hidden-admin");
+        const reportsSection = document.getElementById("reports-section");
+        if (reportsSection) {
+          reportsSection.classList.remove("hidden-admin");
         }
         alert("Admin panel unlocked.");
       } else {
