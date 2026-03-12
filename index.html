@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cloud Kitchen - Samosa &amp; Somas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand">
+        <h1>Radhika's Kitchen</h1>
+        <p>Fresh samosa &amp; Somas available, contact for booking</p>
+      </div>
+      <div class="contact">
+        <p>Call / WhatsApp: <span>9025261081</span></p>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- Menu -->
+      <section class="panel" id="menu-section">
+        <h2>Menu</h2>
+        <div id="menu-list" class="menu-grid">
+          <!-- Menu cards rendered by JS -->
+        </div>
+      </section>
+
+      <!-- Cart / Billing -->
+      <section class="panel" id="cart-section">
+        <h2>Cart &amp; Bill</h2>
+
+        <div id="bill-header">
+          <h3>Order Bill</h3>
+          <p id="bill-datetime"></p>
+        </div>
+
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cart-body">
+            <!-- Cart rows rendered by JS -->
+          </tbody>
+        </table>
+
+        <div class="totals">
+          <div class="totals-row">
+            <span>Sub Total</span>
+            <span id="subtotal-amount">₹0.00</span>
+          </div>
+          <div class="totals-row grand">
+            <span>Grand Total</span>
+            <span id="grand-total">₹0.00</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="pay-now-btn" class="btn primary">Pay Now (QR)</button>
+          <button id="print-bill-btn" class="btn">Print Bill</button>
+          <button id="clear-cart-btn" class="btn danger">Clear Cart</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Reports and Admin -->
+    <section class="panel wide" id="reports-section">
+      <div class="reports-layout">
+        <!-- Monthly sales report -->
+        <div class="reports-block">
+          <h2>Monthly Sales Report</h2>
+          <div class="report-controls">
+            <label for="month-select">Select month:</label>
+            <input type="month" id="month-select" />
+            <button id="refresh-report-btn" class="btn small">Refresh</button>
+          </div>
+
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Orders</th>
+                <th>Total Amount (₹)</th>
+              </tr>
+            </thead>
+            <tbody id="report-body">
+              <!-- Report rows rendered by JS -->
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Monthly Total</th>
+                <th id="report-total-orders">0</th>
+                <th id="report-total-amount">₹0.00</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <!-- Admin / Menu CRUD (hidden by default, unlocked via Admin Login button) -->
+        <div class="reports-block hidden-admin" id="admin-section">
+          <h2>Admin - Menu Setup</h2>
+          <form id="menu-form" class="menu-form">
+            <input type="hidden" id="menu-id" />
+            <div class="field">
+              <label for="menu-name">Name</label>
+              <input id="menu-name" type="text" placeholder="Item name" required />
+            </div>
+            <div class="field">
+              <label for="menu-price">Price (₹)</label>
+              <input
+                id="menu-price"
+                type="number"
+                min="0"
+                step="1"
+                placeholder="Price"
+                required
+              />
+            </div>
+            <div class="field">
+              <label for="menu-image">Image URL</label>
+              <input
+                id="menu-image"
+                type="text"
+                placeholder="https://example.com/samosa.jpg"
+              />
+            </div>
+            <div class="field checkbox-field">
+              <label>
+                <input id="menu-active" type="checkbox" checked />
+                Active (show in menu)
+              </label>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn primary" id="menu-save-btn">Save Item</button>
+              <button type="button" class="btn" id="menu-reset-btn">Reset</button>
+            </div>
+          </form>
+
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Active</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="admin-menu-body">
+              <!-- Admin menu rows rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Small fixed Admin Login button (owner only) -->
+    <button id="admin-login-btn" class="btn small admin-login-btn">Admin Login</button>
+
+    <!-- Pay Now QR Modal -->
+    <div id="qr-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <button id="qr-close-btn" class="modal-close">×</button>
+        <h2>Pay using UPI</h2>
+        <p class="qr-amount">
+          Amount: <span id="qr-amount">₹0.00</span>
+        </p>
+        <p class="qr-instruction">
+          Scan this QR with any UPI app and complete the payment. After payment, click
+          <strong>Confirm Payment</strong>.
+        </p>
+        <div class="qr-image-wrapper">
+          <!-- Replace src with your actual static UPI QR image file -->
+          <img
+            id="upi-qr-image"
+            src="C:/Users/VIMAL/.cursor/projects/d-Projects-Website/assets/c__Users_VIMAL_AppData_Roaming_Cursor_User_workspaceStorage_cf56dccd64ba2e8a08c088f1d0b98e56_images_WhatsApp_Image_2026-03-12_at_5.49.26_PM-1c17a9a8-3cfe-48ed-8112-1b32dbb5b868.png"
+            alt="UPI QR Code"
+          />
+        </div>
+        <div class="modal-actions">
+          <button id="confirm-payment-btn" class="btn primary">Confirm Payment</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+  </html>
+
