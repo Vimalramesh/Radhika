@@ -49,16 +49,14 @@ function loadMenu() {
         id: generateId(),
         name: "Samosa",
         price: 15,
-        imageUrl:
-          "file:///C:/Users/VIMAL/.cursor/projects/d-Projects-Website/assets/c__Users_VIMAL_AppData_Roaming_Cursor_User_workspaceStorage_cf56dccd64ba2e8a08c088f1d0b98e56_images_samosa-2225c823-450f-4652-9f60-e43b352771e7.png",
+        imageUrl: "samosa.png",
         isActive: true,
       },
       {
         id: generateId(),
         name: "Somas",
         price: 20,
-        imageUrl:
-          "file:///C:/Users/VIMAL/.cursor/projects/d-Projects-Website/assets/c__Users_VIMAL_AppData_Roaming_Cursor_User_workspaceStorage_cf56dccd64ba2e8a08c088f1d0b98e56_images_SweetSomas1-ec45e48e-a574-4605-b784-4bd1f95e93ef.png",
+        imageUrl: "somas.png",
         isActive: true,
       },
     ];
